@@ -42,6 +42,10 @@ button:hover {
   gap: 20px;              /* spacing between images */
 }
 
+.gallery-container a {
+  display: block; /* makes the whole image clickable */
+}
+
 .gallery-container img {
   width: 400px;           /* adjust size as needed */
   max-width: 100%;        /* responsive on smaller screens */
@@ -50,7 +54,7 @@ button:hover {
   transition: transform 0.3s;
 }
 
-.gallery-container img:hover {
+.gallery-container a:hover img {
   transform: scale(1.05);
 }
 
