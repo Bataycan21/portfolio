@@ -1,64 +1,145 @@
-/* Default Light Theme */
+/* ----------------- Global Styles ----------------- */
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f5f5f5;
   color: #333;
   margin: 0;
   padding: 20px;
-  transition: background-color 0.3s, color 0.3s;
+  transition: background-color 0.4s, color 0.4s;
 }
 
+h1, h2 {
+  margin: 10px 0;
+}
+
+ul {
+  list-style: disc;
+  padding-left: 20px;
+}
+
+/* ----------------- Header ----------------- */
 header {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 }
 
 #profile-img {
   width: 150px;
   border-radius: 50%;
-  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 4px solid #4CAF50;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+#profile-img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+#name {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+#course-year {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 15px;
 }
 
 button {
-  padding: 10px 20px;
+  padding: 10px 25px;
   margin-top: 10px;
   cursor: pointer;
   border: none;
-  border-radius: 5px;
+  border-radius: 25px;
   background-color: #4CAF50;
   color: white;
-  transition: background-color 0.3s;
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.2s;
 }
 
 button:hover {
   background-color: #45a049;
-}
-
-/* Gallery stacked vertically */
-.gallery-container {
-  display: flex;
-  flex-direction: column; /* stack images top to bottom */
-  align-items: center;    /* center them horizontally */
-  gap: 20px;              /* spacing between images */
-}
-
-.gallery-container a {
-  display: block; /* makes the whole image clickable */
-}
-
-.gallery-container img {
-  width: 400px;           /* adjust size as needed */
-  max-width: 100%;        /* responsive on smaller screens */
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-  transition: transform 0.3s;
-}
-
-.gallery-container a:hover img {
   transform: scale(1.05);
 }
 
-/* Dark Theme */
+/* ----------------- Sections ----------------- */
+section {
+  margin-bottom: 50px;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+h2 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* ----------------- Gallery ----------------- */
+.gallery-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  justify-items: center;
+}
+
+.gallery-container a {
+  position: relative;
+  display: block;
+  text-decoration: none;
+}
+
+.gallery-container img {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 10px;
+  box-shadow: 0 6px 10px rgba(0,0,0,0.2);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.gallery-container img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 15px rgba(0,0,0,0.3);
+}
+
+.caption {
+  display: block;
+  text-align: center;
+  margin-top: 8px;
+  color: #333;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: color 0.3s;
+}
+
+/* ----------------- Newest Project ----------------- */
+.newest-project {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.newest-project a img {
+  max-width: 700px; /* larger size for newest project */
+  border-radius: 12px;
+  box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.newest-project a img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 20px rgba(0,0,0,0.4);
+}
+
+.newest-project .caption {
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+
+/* ----------------- Dark Theme ----------------- */
 body.dark {
   background-color: #121212;
   color: #f5f5f5;
@@ -71,4 +152,12 @@ body.dark button {
 
 body.dark button:hover {
   background-color: #555;
+}
+
+body.dark .caption {
+  color: #f5f5f5;
+}
+
+body.dark #course-year {
+  color: #ccc;
 }
