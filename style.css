@@ -1,163 +1,415 @@
-/* ----------------- Global Styles ----------------- */
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f5f5f5;
-  color: #333;
-  margin: 0;
-  padding: 20px;
-  transition: background-color 0.4s, color 0.4s;
+/* ============================================================
+   Portfolio CSS — Refined Editorial Style
+   Fonts: DM Serif Display + DM Sans
+   Theme: Warm cream light / deep charcoal dark
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap');
+
+/* ── CSS Variables ─────────────────────────────────────────── */
+:root {
+  --bg:          #faf8f4;
+  --bg-card:     #ffffff;
+  --bg-subtle:   #f2efe8;
+  --text:        #1a1814;
+  --text-muted:  #6b6560;
+  --text-faint:  #a09890;
+  --accent:      #3d6b4f;
+  --accent-soft: #e8f0eb;
+  --accent-mid:  #5a8f6e;
+  --border:      #e4dfd6;
+  --shadow-sm:   0 2px 8px rgba(26,24,20,.07);
+  --shadow-md:   0 6px 24px rgba(26,24,20,.11);
+  --shadow-lg:   0 12px 48px rgba(26,24,20,.15);
+  --radius:      14px;
+  --radius-sm:   8px;
+  --transition:  0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-h1, h2 {
-  margin: 10px 0;
+body.dark {
+  --bg:          #131210;
+  --bg-card:     #1d1c19;
+  --bg-subtle:   #252320;
+  --text:        #f0ece4;
+  --text-muted:  #a09890;
+  --text-faint:  #6b6560;
+  --accent:      #6aad84;
+  --accent-soft: #1e2e23;
+  --accent-mid:  #5a9870;
+  --border:      #2e2c28;
+  --shadow-sm:   0 2px 8px rgba(0,0,0,.25);
+  --shadow-md:   0 6px 24px rgba(0,0,0,.35);
+  --shadow-lg:   0 12px 48px rgba(0,0,0,.45);
+}
+
+/* ── Reset & Base ──────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text);
+  margin: 0;
+  padding: 40px 20px 80px;
+  min-height: 100vh;
+  transition: color var(--transition);
+  line-height: 1.65;
+  font-size: 1rem;
+
+  /* ── Full-page background image ── */
+  background-color: var(--bg);
+  background-image:
+    /* Dark overlay so text stays readable */
+    linear-gradient(
+      to bottom,
+      rgba(15, 12, 8, 0.55) 0%,
+      rgba(15, 12, 8, 0.35) 40%,
+      rgba(15, 12, 8, 0.55) 100%
+    ),
+    /* Replace this URL with your own image */
+    url('Background.jpg');
+  background-size: cover;
+  background-position: center top;
+  background-attachment: scroll;
+  background-repeat: no-repeat;
+}
+
+body.dark {
+  background-image:
+    linear-gradient(
+      to bottom,
+      rgba(5, 4, 2, 0.72) 0%,
+      rgba(5, 4, 2, 0.55) 40%,
+      rgba(5, 4, 2, 0.72) 100%
+    ),
+    url('Background.jpg');
+  background-size: cover;
+  background-position: center top;
+  background-attachment: scroll;
+  background-repeat: no-repeat;
+}
+
+/* ── Content frame — curved square card wrapping everything ── */
+.page-wrapper {
+  max-width: 1080px;
+  margin: 0 auto;
+  background: var(--bg-card);
+  border-radius: 28px;
+  border: 1px solid var(--border);
+  box-shadow:
+    var(--shadow-lg),
+    0 0 0 1px rgba(255,255,255,0.06) inset;
+  padding: 0 48px 64px;
+  backdrop-filter: blur(2px);
+  transition: background var(--transition), border-color var(--transition);
+  /* Subtle grain texture inside the card */
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.022'/%3E%3C/svg%3E"),
+    none;
+  background-color: var(--bg-card);
+}
+
+body.dark .page-wrapper {
+  background-color: var(--bg-card);
+  box-shadow:
+    var(--shadow-lg),
+    0 0 0 1px rgba(255,255,255,0.04) inset;
+}
+
+@media (max-width: 600px) {
+  .page-wrapper {
+    padding: 0 20px 48px;
+    border-radius: 18px;
+  }
+}
+
+h1, h2, h3 {
+  font-family: 'DM Serif Display', serif;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: var(--text);
 }
 
 ul {
-  list-style: disc;
-  padding-left: 20px;
+  list-style: none;
+  padding-left: 0;
 }
 
-/* ----------------- Header ----------------- */
+ul li {
+  padding: 0.25rem 0 0.25rem 1.4rem;
+  position: relative;
+  color: var(--text-muted);
+}
+
+ul li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+/* ── Header ────────────────────────────────────────────────── */
 header {
   text-align: center;
-  margin-bottom: 50px;
+  padding: 72px 0 60px;
+  position: relative;
+}
+
+header::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: var(--accent);
+  margin: 2rem auto 0;
+  border-radius: 2px;
 }
 
 #profile-img {
-  width: 150px;
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
-  margin-bottom: 10px;
-  border: 4px solid #4CAF50;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-#profile-img:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
-}
-
-#name {
-  font-size: 2rem;
-  font-weight: bold;
-}
-
-#course-year {
-  font-size: 1.2rem;
-  color: #555;
-  margin-bottom: 15px;
-}
-
-button {
-  padding: 10px 25px;
-  margin-top: 10px;
-  cursor: pointer;
-  border: none;
-  border-radius: 25px;
-  background-color: #4CAF50;
-  color: white;
-  font-weight: bold;
-  transition: background-color 0.3s, transform 0.2s;
-}
-
-button:hover {
-  background-color: #45a049;
-  transform: scale(1.05);
-}
-
-/* ----------------- Sections ----------------- */
-section {
-  margin-bottom: 50px;
-  max-width: 1000px;
+  margin-bottom: 1.5rem;
+  border: 3px solid var(--border);
+  outline: 6px solid var(--accent-soft);
+  object-fit: cover;
+  transition: transform var(--transition), box-shadow var(--transition), outline-color var(--transition);
+  display: block;
   margin-left: auto;
   margin-right: auto;
 }
 
-h2 {
-  font-size: 1.8rem;
-  margin-bottom: 15px;
-  text-align: center;
+#profile-img:hover {
+  transform: scale(1.04) translateY(-3px);
+  box-shadow: var(--shadow-lg);
+  outline-color: var(--accent-mid);
 }
 
-/* ----------------- Gallery ----------------- */
+#name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2.8rem;
+  font-weight: 400;
+  color: var(--text);
+  letter-spacing: -0.03em;
+  margin-bottom: 0.5rem;
+}
+
+#course-year {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  margin-bottom: 1.75rem;
+  letter-spacing: 0.02em;
+}
+
+/* ── Button ────────────────────────────────────────────────── */
+button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.65rem 1.6rem;
+  cursor: pointer;
+  border: 1.5px solid var(--accent);
+  border-radius: 999px;
+  background-color: var(--accent);
+  color: #ffffff;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  transition: background-color var(--transition), transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+
+button:hover {
+  background-color: transparent;
+  color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+body.dark button {
+  background-color: var(--accent);
+  color: #0e1a12;
+  border-color: var(--accent);
+}
+
+body.dark button:hover {
+  background-color: transparent;
+  color: var(--accent);
+}
+
+/* ── Sections ──────────────────────────────────────────────── */
+section {
+  margin: 0 0 72px;
+}
+
+section:last-child {
+  margin-bottom: 0;
+}
+
+/* Section label / eyebrow */
+section > p.label,
+.section-label {
+  display: block;
+  text-align: center;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+/* ── Divider ───────────────────────────────────────────────── */
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 0 0 2rem;
+}
+
+/* ── Gallery ───────────────────────────────────────────────── */
 .gallery-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  justify-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
 }
 
 .gallery-container a {
   position: relative;
   display: block;
   text-decoration: none;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--bg-card);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.gallery-container a:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
 }
 
 .gallery-container img {
   width: 100%;
-  max-width: 400px;
-  border-radius: 10px;
-  box-shadow: 0 6px 10px rgba(0,0,0,0.2);
-  transition: transform 0.3s, box-shadow 0.3s;
+  display: block;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  transition: transform var(--transition);
 }
 
-.gallery-container img:hover {
-  transform: scale(1.05);
-  box-shadow: 0 10px 15px rgba(0,0,0,0.3);
+.gallery-container a:hover img {
+  transform: scale(1.04);
 }
 
 .caption {
   display: block;
-  text-align: center;
-  margin-top: 8px;
-  color: #333;
-  font-weight: bold;
-  font-size: 1rem;
-  transition: color 0.3s;
+  padding: 0.9rem 1rem 1rem;
+  color: var(--text);
+  font-weight: 500;
+  font-size: 0.88rem;
+  background: var(--bg-card);
+  transition: color var(--transition);
+  border-top: 1px solid var(--border);
 }
 
-/* ----------------- Newest Project ----------------- */
+body.dark .caption {
+  color: var(--text);
+}
+
+/* ── Newest Project ────────────────────────────────────────── */
 .newest-project {
-  margin-top: 50px;
+  margin-top: 2.5rem;
   display: flex;
   justify-content: center;
 }
 
-.newest-project a img {
-  max-width: 700px; /* larger size for newest project */
-  border-radius: 12px;
-  box-shadow: 0 8px 15px rgba(0,0,0,0.3);
-  transition: transform 0.3s, box-shadow 0.3s;
+.newest-project a {
+  display: block;
+  text-decoration: none;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  max-width: 680px;
+  width: 100%;
+  transition: transform var(--transition), box-shadow var(--transition);
 }
 
-.newest-project a img:hover {
-  transform: scale(1.05);
-  box-shadow: 0 12px 20px rgba(0,0,0,0.4);
+.newest-project a:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+
+.newest-project a img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  transition: transform var(--transition);
+}
+
+.newest-project a:hover img {
+  transform: scale(1.03);
 }
 
 .newest-project .caption {
-  font-size: 1.2rem;
-  margin-top: 10px;
+  font-size: 1rem;
+  padding: 1rem 1.25rem 1.1rem;
+  font-weight: 600;
 }
 
-/* ----------------- Dark Theme ----------------- */
-body.dark {
-  background-color: #121212;
-  color: #f5f5f5;
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  body {
+    padding: 0 16px 60px;
+  }
+
+  #name {
+    font-size: 2.1rem;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
+  .gallery-container {
+    grid-template-columns: 1fr;
+  }
 }
 
-body.dark button {
-  background-color: #333;
-  color: #f5f5f5;
+/* ── Scroll fade-in animation ──────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-body.dark button:hover {
-  background-color: #555;
+section {
+  animation: fadeUp 0.55s ease both;
 }
 
-body.dark .caption {
-  color: #f5f5f5;
-}
-
-body.dark #course-year {
-  color: #ccc;
-}
+section:nth-child(2) { animation-delay: 0.05s; }
+section:nth-child(3) { animation-delay: 0.10s; }
+section:nth-child(4) { animation-delay: 0.15s; }
+section:nth-child(5) { animation-delay: 0.20s; }
